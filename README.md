@@ -1,1 +1,2 @@
 # datasetConvertTools
+eiseg是将Eiseg标注工具导出的json文件，转换为labelme格式，每个json文件对应一幅图像
