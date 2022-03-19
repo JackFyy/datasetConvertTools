@@ -8,6 +8,14 @@ import pandas as pd
 from tqdm import tqdm
 import cv2
 
+def seg_point(seg):
+    points = []
+    for i in range(0,len(seg[0])-1,2):
+        x = int(seg[0][i])
+        y = int(seg[0][i+1])
+        points.append([x,y])
+    return points
+    
 def read_coco():
     anno = 'instances_default.json'
     with open(anno, 'r', encoding='utf-8') as load_f:
@@ -54,10 +62,11 @@ def read_coco():
             category_id = row["category_id"]
             cate_name = categories[category_id]
             print("seg",seg)
+            points = seg_point(seg)
             data['shapes'].append(
                 dict(
                     label=cate_name,
-                    points=seg,
+                    points=points,
                     group_id=None,
                     shape_type="polygon",
                     flags=dict(),
